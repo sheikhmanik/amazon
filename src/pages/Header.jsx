@@ -1,17 +1,17 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faCartShopping, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import amazonIcon from "../assets/amazon.png";
 import ModeToggle from "./header/ModeToggle";
 import Category from "./header/Category";
 import Language from "./header/Language";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faCartShopping, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "./Navbar";
-import CartModal from "../ui/CartModal";
+import Modal from "../ui/Modal";
 
 export default function Header() {
 
-    const cartModal = useRef();
+    const modal = useRef();
     const [search, setSearch] = useState("");
     const [sideNav, setSideNav] = useState(false);
 
@@ -20,12 +20,28 @@ export default function Header() {
     }
 
     function handleModal() {
-        cartModal.current.open();
+        modal.current.open();
+    }
+
+    function onClose() {
+        modal.current.close();
     }
 
     return (
         <>
-        <CartModal ref={cartModal} />
+        <Modal ref={modal}>
+            <div className="flex flex-col items-center text-center">
+                <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">Your cart is empty</p>
+
+                <button 
+                    className="px-4 py-2 bg-white text-black rounded-lg shadow-md hover:bg-gray-100 transition-all cursor-pointer"
+                    onClick={onClose}
+                >
+                    Close
+                </button>
+            </div>
+        </Modal>
         <header className="fixed w-full bg-slate-800 dark:bg-slate-900 z-20">
             <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between sm:p-3 px-4 py-5 bg-slate-800 dark:bg-slate-900 text-white w-full gap-2 sm:gap-5 md:gap-7 xl:gap-10">
 
