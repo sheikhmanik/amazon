@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import amazonIcon from "../assets/amazon.png";
 import ModeToggle from "./header/ModeToggle";
@@ -7,9 +7,11 @@ import Language from "./header/Language";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCartShopping, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "./Navbar";
+import CartModal from "../ui/CartModal";
 
 export default function Header() {
 
+    const cartModal = useRef();
     const [search, setSearch] = useState("");
     const [sideNav, setSideNav] = useState(false);
 
@@ -17,7 +19,13 @@ export default function Header() {
         setSideNav(!sideNav);
     }
 
+    function handleModal() {
+        cartModal.current.open();
+    }
+
     return (
+        <>
+        <CartModal ref={cartModal} />
         <header className="fixed w-full bg-slate-800 dark:bg-slate-900 z-20">
             <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between sm:p-3 px-4 py-5 bg-slate-800 dark:bg-slate-900 text-white w-full gap-2 sm:gap-5 md:gap-7 xl:gap-10">
 
@@ -28,7 +36,7 @@ export default function Header() {
                     </div>
                     <div className="flex gap-5">
                     <Link to="account"><FontAwesomeIcon icon={faUser} className="scale-150"/></Link>
-                    <Link to="cart"><FontAwesomeIcon icon={faCartShopping} className="scale-150"/></Link>
+                    <Link to="cart" onClick={handleModal}><FontAwesomeIcon icon={faCartShopping} className="scale-150"/></Link>
                     </div>
                 </div>
 
@@ -50,7 +58,7 @@ export default function Header() {
                     <Link to="/account">
                         <FontAwesomeIcon icon={faUser} className="scale-150 cursor-pointer"/>
                     </Link>
-                    <Link to="cart">
+                    <Link to="cart" onClick={handleModal}>
                         <FontAwesomeIcon icon={faCartShopping} className="scale-150 cursor-pointer"/>
                     </Link>
                 </div>
@@ -63,5 +71,6 @@ export default function Header() {
                 ></div>
             </div>
         </header>
+        </>
     )
 }
