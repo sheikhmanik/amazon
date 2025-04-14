@@ -7,7 +7,7 @@ import useTheme from "../hooks/useTheme";
 export default function ModeToggleTwo() {
 
     const dispatch = useDispatch();
-    const theme = useSelector(state => state.toggleMode.theme)
+    const theme = useSelector(state => state.mode.theme)
     function handleMode() {
         dispatch(ToggleModeActions.toggle());
     }

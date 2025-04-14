@@ -5,7 +5,7 @@ import languageReducer from "./language.js";
 
 const store = configureStore({
     reducer: {
-        toggleMode: ToggleModeReducer,
+        mode: ToggleModeReducer,
         category: categoryReducer,
         language: languageReducer
     }
