@@ -1,17 +1,19 @@
-import { useContext, useEffect, useRef } from "react";
-import { HeaderContext } from "../../context/HeaderContext";
+import { useState, useContext, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 
 export default function Category() {
 
     const category = useRef();
 
-    const { 
-        options,
-        selected,
-        isOpen,
-        setIsOpen,
-        handleSelected
-    } = useContext(HeaderContext);
+    const options = useSelector(state => state.category.options);
+
+    const [selected, setSelected] = useState(options[0]);
+    const [isOpen, setIsOpen] = useState(false);
+
+    function handleSelected(option) {
+        setSelected(option)
+        setIsOpen(false)
+    }
 
     useEffect(() => {
         const handleClickOutside = (e) => {

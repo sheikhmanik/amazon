@@ -1,11 +1,26 @@
-import { useContext } from "react";
-import { HeaderContext } from "../../context/HeaderContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { ToggleModeActions } from "../../store/mode";
+import { useEffect } from "react";
 
 export default function ModeToggle() {
 
-    const { darkMode, handleMode } = useContext(HeaderContext);
+    const dispatch = useDispatch();
+    const theme = useSelector(state => state.toggleMode.theme)
+    function handleMode() {
+        dispatch(ToggleModeActions.toggle());
+    }
+
+    useEffect(() => {
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark')
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'dark')
+        }
+    }, [theme]);
 
     return (
 
@@ -21,7 +36,7 @@ export default function ModeToggle() {
                 className="theme-controller"
                 value="synthwave"
                 onChange={handleMode}
-                checked={darkMode}
+                checked={theme === 'dark'}
             />
 
             {/* sun icon */}
