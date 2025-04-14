@@ -23,12 +23,6 @@ export default function ModeToggle() {
     }, [theme]);
 
     return (
-
-        // <div onClick={handleMode} className="relative p-5 flex items-center justify-center cursor-pointer">
-        //     <FontAwesomeIcon icon={faMoon} className={`${darkMode ? '-rotate-20 opacity-100' : 'rotate-50 opacity-0'} transition-all duration-300 absolute scale-150`} />
-        //     <FontAwesomeIcon icon={faSun} className={`${!darkMode ? 'rotate-0 opacity-100' : 'rotate-50 opacity-0'} transition-all duration-300 absolute scale-150`} />
-        // </div>
-
         <label className="swap swap-rotate scale-75">
             {/* this hidden checkbox controls the state */}
             <input

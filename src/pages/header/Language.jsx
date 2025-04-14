@@ -1,20 +1,19 @@
 import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { languageActions } from "../../store/language";
 
 export default function Language() {
 
     const lang = useRef();
 
-    const options = [
-        "Eng",
-        "Hindi",
-        "Bangla"
-    ]
+    const dispatch = useDispatch();
+    const languages = useSelector(state => state.languages.languages);
+    const selectedLanguage = useSelector(state => state.languages.selectedLanguage);
 
     const [isOpen, setIsOpen] = useState(false);
-    const [selected, setSelected] = useState(options[0]);
 
     function handleLanguage(lang) {
-        setSelected(lang);
+        dispatch(languageActions.setLanguage(lang));
         setIsOpen(false);
     }
 
@@ -36,12 +35,12 @@ export default function Language() {
                 onClick={() => setIsOpen(!isOpen)}
                 className="cursor-pointer flex items-center justify-between h-10 px-2 gap-2"
             >
-                {selected}
+                {selectedLanguage}
                 <span className={`${isOpen ? "rotate-180" : "rotate-0"}`}>▼</span>
             </div>
             {isOpen && (
                 <div className="absolute w-28 bg-blue-800 text-white top-full left-0 mt-1 z-10 shadow-lg transform transition-all duration-500">
-                    {options.map((lang, index) => (
+                    {languages.map((lang, index) => (
                         <div 
                             className="cursor-pointer hover:bg-blue-900 p-2 flex items-center justify-start"
                             onClick={() => handleLanguage(lang)}

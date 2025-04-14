@@ -1,17 +1,19 @@
-import { useState, useContext, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { categoryActions } from "../../store/category";
 
 export default function Category() {
 
     const category = useRef();
 
+    const dispatch = useDispatch();
     const options = useSelector(state => state.category.options);
+    const selected = useSelector(state => state.category.selected);
 
-    const [selected, setSelected] = useState(options[0]);
     const [isOpen, setIsOpen] = useState(false);
 
     function handleSelected(option) {
-        setSelected(option)
+        dispatch(categoryActions.setSelected(option))
         setIsOpen(false)
     }
 
