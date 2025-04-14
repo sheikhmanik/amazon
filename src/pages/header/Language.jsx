@@ -7,8 +7,8 @@ export default function Language() {
     const lang = useRef();
 
     const dispatch = useDispatch();
-    const languages = useSelector(state => state.languages.languages);
-    const selectedLanguage = useSelector(state => state.languages.selectedLanguage);
+    const languages = useSelector(state => state.language.languages);
+    const selectedLanguage = useSelector(state => state.language.selectedLanguage);
 
     const [isOpen, setIsOpen] = useState(false);
 

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export default function useApplyTheme() {
-    const theme = useSelector(state => state.toggleMode.theme)
+    const theme = useSelector(state => state.toggleMode.theme);
     useEffect(() => {
         if (theme === 'dark') {
             document.documentElement.classList.add('dark');
@@ -10,4 +10,4 @@ export default function useApplyTheme() {
             document.documentElement.classList.remove('dark');
         }
     }, [theme]);
-}
+};

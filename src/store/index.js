@@ -7,7 +7,7 @@ const store = configureStore({
     reducer: {
         toggleMode: ToggleModeReducer,
         category: categoryReducer,
-        languages: languageReducer
+        language: languageReducer
     }
 })
 
