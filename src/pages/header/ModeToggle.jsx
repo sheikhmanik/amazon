@@ -1,8 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { ToggleModeActions } from "../../store/mode";
-import { useEffect } from "react";
+import useTheme from "../../hooks/useTheme";
 
 export default function ModeToggle() {
 
@@ -12,15 +10,7 @@ export default function ModeToggle() {
         dispatch(ToggleModeActions.toggle());
     }
 
-    useEffect(() => {
-        if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark')
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('theme', 'dark')
-        }
-    }, [theme]);
+    useTheme();
 
     return (
         <label className="swap swap-rotate scale-75">

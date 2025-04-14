@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { ToggleModeActions } from "../store/mode";
+import useTheme from "../hooks/useTheme";
 
 export default function ModeToggleTwo() {
 
@@ -12,15 +12,7 @@ export default function ModeToggleTwo() {
         dispatch(ToggleModeActions.toggle());
     }
 
-    useEffect(() => {
-        if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark')
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('theme', 'dark')
-        }
-    }, [theme]);
+    useTheme();
 
     return (
         <div onClick={handleMode} className="cursor-pointer">
