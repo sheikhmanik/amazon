@@ -42,7 +42,7 @@ export default function Hero({ autoSlide, autoSlideInterval }) {
     }
 
     return (
-        <div className="flex overflow-hidden mx-auto max-w-[1600px] max-h-[850px] relative">
+        <div className="flex overflow-hidden mx-auto w-screen max-w-[1600px] max-h-[850px] relative">
             <div onClick={() => handleHeroImg(-1)} className="absolute top-1/2 left-4 -translate-y-1/2 z-10 h-16 sm:h-20 w-6 sm:w-10 bg-black/50 hover:bg-black/70 flex items-center justify-center border-1 border-black/50 rounded-sm cursor-pointer text-white">
                 <FontAwesomeIcon icon={faArrowLeft} className="absolute scale-75 sm:scale-100"/>
             </div>

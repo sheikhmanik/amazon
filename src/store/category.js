@@ -2,12 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const options = [
     "All",
-    "Cloth",
-    "Electronics",
+    "Beauty",
+    "Fragrances",
     "Furniture",
-    "Jwellary",
-    "Industrial"
-]
+    "Groceries"
+];
 
 const categorySlice = createSlice({
     name: 'category',
