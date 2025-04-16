@@ -8,7 +8,7 @@ export default function Category() {
 
     const dispatch = useDispatch();
     const options = useSelector(state => state.category.options);
-    const selected = useSelector(state => state.category.selected);
+    const selected = useSelector(state => state.category.selectedCategory);
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -31,10 +31,10 @@ export default function Category() {
         <div className="relative" ref={category}>
             <div
                 onClick={() => setIsOpen(!isOpen)}
-                className="cursor-pointer flex items-center justify-between h-10 px-2 gap-2"
+                className="cursor-pointer flex items-center h-10 px-2 gap-1 w-14 sm:w-auto overflow-hidden"
             >
-                {selected}
                 <span className={`${isOpen ? "rotate-180" : "rotate-0"}`}>▼</span>
+                {selected}
             </div>
             {isOpen && (
                 <div className="absolute w-28 bg-blue-800 text-white top-full left-0 mt-1 z-10 shadow-lg">

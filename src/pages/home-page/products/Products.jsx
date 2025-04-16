@@ -67,7 +67,7 @@ export default function Products({ category, title }) {
                     <h3 className="font-Montserrat uppercase font-bold text-xl md:text-2xl ml-5">{ title }</h3>
                     <Slider key={slidesToShow} {...settings} >
                         {products.map((product, index) => (
-                            <div key={index} className="px-2 pb-10 sm:pb-5">
+                            <div key={index} className="px-2">
                                 <Product {...product} />
                             </div>
                         ))}

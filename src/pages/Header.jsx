@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCartShopping, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -8,11 +8,12 @@ import Category from "./header/Category";
 import Language from "./header/Language";
 import Navbar from "./Navbar";
 import Modal from "../ui/Modal";
+import { useSelector } from "react-redux";
+import LoadingTwo from "../ui/LoadingTwo";
 
 export default function Header() {
 
     const modal = useRef();
-    const [search, setSearch] = useState("");
     const [sideNav, setSideNav] = useState(false);
 
     function handleSideNav() {
@@ -26,6 +27,58 @@ export default function Header() {
     function onClose() {
         modal.current.close();
     }
+
+    const category = useSelector(state => state.category.selectedCategory)
+    const [products, setProducts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [openResultsDiv, setOpenResultsDiv] = useState(false);
+    const [resultsNotFound, setResultsNotFound] = useState(false);
+    const searchResults = useRef();
+    const searchInputRef = useRef();
+
+    function handleSearch(event) {
+        const value = event.target.value;
+        setSearchTerm(value);
+    
+        if (value.trim() !== "") {
+            setIsLoading(true);
+            setOpenResultsDiv(true);
+            fetch('https://dummyjson.com/products')
+                .then(res => res.json())
+                .then(data => {
+                    const filteredProducts = category.toLowerCase() === 'all'
+                        ? data.products
+                        : data.products.filter(product => category.toLowerCase() === product.category.toLowerCase());
+    
+                    const searchedProducts = filteredProducts.filter(product =>
+                        product.title.toLowerCase().includes(value.toLowerCase())
+                    );
+                    if (searchedProducts.length === 0) {
+                        setResultsNotFound(true);
+                    } else {
+                        setResultsNotFound(false);
+                    }
+                    setProducts(searchedProducts);
+                    setIsLoading(false);
+                });
+        } else {
+            setProducts([]);
+            setOpenResultsDiv(false);
+        }
+    }
+
+    useEffect(() => {
+        function handleOutsideClick(event) {
+            if (!searchResults.current?.contains(event.target) && !searchInputRef.current.contains(event.target)) {
+                setOpenResultsDiv(false);
+            }
+        }
+        document.addEventListener('click', handleOutsideClick);
+        return () => {
+            document.removeEventListener('click', handleOutsideClick);
+        }
+    }, []);
 
     return (
         <>
@@ -58,15 +111,60 @@ export default function Header() {
 
                 <Link to="/"><img src={amazonIcon} alt="Amazon Icon" className="hidden sm:block w-20 sm:w-30"/></Link>
 
-                <div className="flex items-center justify-center h-10 gap-1 bg-white text-gray-900 rounded-sm w-full max-w-3xl">
-                    <div className="hidden sm:block">
+                <div className="w-full max-w-3xl flex items-center justify-center relative">
+                    <div className="flex items-center justify-center h-10 gap-1 bg-white text-gray-900 rounded-sm w-full max-w-3xl">
                         <Category/>
+                        <input
+                            type="text"
+                            placeholder="Search Amazon.in"
+                            onChange={handleSearch}
+                            ref={searchInputRef}
+                            onFocus={handleSearch}
+                            className="w-full pl-3 h-full outline-none border-l-1 sm:border-l-2 relative"
+                        />
+                        {searchTerm.trim() !== "" && openResultsDiv && (
+                            <div ref={searchResults} className="absolute w-full mt-[350px] md:mt-[550px] h-[300px] md:h-[500px] overflow-scroll dark:bg-gray-700 bg-gray-200 text-black dark:text-white flex flex-col">
+                                {isLoading && products.length > 0 && (
+                                    <div className="flex items-center justify-center mt-5">
+                                        <LoadingTwo/>
+                                    </div>
+                                )}
+                                {products.length === 0 && resultsNotFound && (
+                                    <div className="flex items-center justify-center mt-5">
+                                        <p className="text-sm dark:text-gray-300 text-gray-700">Results not found!</p>
+                                    </div>
+                                )}
+                                {products.length > 0 && !isLoading && products.map((product, index) => (
+                                    <div key={index} className="flex items-center w-full gap-3 cursor-pointer border-b hover:dark:bg-gray-800 hover:bg-gray-100">
+                                        <div className="w-1/3 h-[100px]">
+                                            <img src={product.images[0]} className="object-contain w-full h-full" />
+                                        </div>
+                                        <div className="w-2/3 flex flex-col items-start">
+                                            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 line-clamp-1">
+                                                {product.title}
+                                            </h2>
+                                            <p className="text-gray-500 dark:text-gray-400 text-sm capitalize line-clamp-1">
+                                                {product.category} | {product.brand}
+                                            </p>
+                                            <div className="flex items-center justify-between mb-3 gap-3">
+                                                <span className="text-lg font-bold text-green-600 dark:text-green-400">
+                                                    ${product.price}
+                                                </span>
+                                                <span className="text-xs text-red-500 dark:text-red-400">
+                                                    {product.discountPercentage}% OFF
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                        <span className="flex items-center justify-center bg-amber-400 h-full p-3 cursor-pointer rounded-sm">
+                            <FontAwesomeIcon icon={faSearch} />
+                        </span>
                     </div>
-                    <input type="text" placeholder="Search Amazon.in" className="w-full pl-3 h-full outline-none border-l-1 sm:border-l-2"/>
-                    <span className="flex items-center justify-center bg-amber-400 h-full p-3 cursor-pointer rounded-sm">
-                        <FontAwesomeIcon icon={faSearch} />
-                    </span>
                 </div>
+
 
                 <div className="hidden sm:flex items-center justify-center gap-5">
                     <Language/>

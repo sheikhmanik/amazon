@@ -12,11 +12,11 @@ const categorySlice = createSlice({
     name: 'category',
     initialState: {
         options,
-        selected: options[0]
+        selectedCategory: options[0]
     },
     reducers: {
         setSelected(state, action) {
-            state.selected = action.payload
+            state.selectedCategory = action.payload
         }
     }
 })
