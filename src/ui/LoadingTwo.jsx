@@ -1,6 +1,6 @@
 export default function LoadingTwo() {
     return (
-        <div className="flex">
+        <div className="flex items-center justify-center">
             <span className="loading loading-ring loading-xs"></span>
             <span className="loading loading-ring loading-sm"></span>
             <span className="loading loading-ring loading-md"></span>

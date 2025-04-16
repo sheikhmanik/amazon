@@ -16,10 +16,6 @@ export default function Header() {
     const modal = useRef();
     const [sideNav, setSideNav] = useState(false);
 
-    function handleSideNav() {
-        setSideNav(!sideNav);
-    }
-
     function handleModal() {
         modal.current.open();
     }
@@ -100,8 +96,8 @@ export default function Header() {
 
                 <div className="flex sm:hidden w-full justify-between px-1">
                     <div className="flex items gap-4">
-                        <FontAwesomeIcon icon={faBars} className="scale-150 cursor-pointer" onClick={handleSideNav} />
-                        <Link to="/"><img src={amazonIcon} alt="Amazon Icon" className="w-20 sm:w-30 block sm:hidden"/></Link>
+                        <FontAwesomeIcon icon={faBars} className="scale-150 cursor-pointer" onClick={() => setSideNav(true)} />
+                        <Link to="/" onClick={() => window.scroll(0, 0)} ><img src={amazonIcon} alt="Amazon Icon" className="w-20 sm:w-30 block sm:hidden"/></Link>
                     </div>
                     <div className="flex gap-5">
                     <Link to="account"><FontAwesomeIcon icon={faUser} className="scale-150"/></Link>
@@ -177,10 +173,10 @@ export default function Header() {
                     </Link>
                 </div>
 
-                <Navbar sideNav={sideNav} setSideNav={setSideNav} closeSideNav={handleSideNav} />
+                <Navbar sideNav={sideNav} setSideNav={setSideNav} />
                 
                 <div
-                    onClick={handleSideNav}
+                    onClick={() => setSideNav(false)}
                     className={`${sideNav ? '' : 'hidden'} fixed top-0 right-0 w-full h-full bg-black/70 transition-normal duration-300 z-10`}
                 ></div>
             </div>
