@@ -95,7 +95,7 @@ export default function Header() {
                 </button>
             </div>
         </Modal>
-        <header className="fixed w-full bg-slate-800 dark:bg-slate-900 z-20">
+        <header className="fixed w-screen bg-slate-800 dark:bg-slate-900 z-20">
             <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between sm:p-3 px-4 py-5 bg-slate-800 dark:bg-slate-900 text-white w-full gap-2 sm:gap-5 md:gap-7 xl:gap-10">
 
                 <div className="flex sm:hidden w-full justify-between px-1">

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function Product({
     id,
     title,
@@ -24,7 +26,7 @@ export default function Product({
 }) {
     return (
         <div className="w-[175px] mx-auto bg-white dark:bg-gray-900 shadow-md dark:shadow-lg rounded-2xl overflow-hidden border dark:border-gray-700 flex flex-col items-center justify-between">
-            <div>
+            <Link to="item" >
                 {/* Product Image */}
                 <img
                     src={thumbnail || images?.[0]}
@@ -57,7 +59,7 @@ export default function Product({
                         <span>Stock: {stock}</span>
                     </div>
                 </div>
-            </div>
+            </Link>
 
             {/* Buttons */}
             <div className="flex w-full h-10">

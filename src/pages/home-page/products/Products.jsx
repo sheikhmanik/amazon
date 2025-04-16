@@ -29,15 +29,15 @@ export default function Products({ category, title }) {
 
     useEffect(() => {
         const updateSlides = () => {
-            const screenWidth = window.innerWidth;
-            const cardWidth = 175 + 10; // 175px card + ~24px margin (e.g. Tailwind `gap-6`)
+            const screenWidth = window.innerWidth > 1536 ? 1536 : window.innerWidth;            
+            const cardWidth = screenWidth <= 400 ? (175 + 10) : (175 + 20); // 175px card + ~24px margin (e.g. Tailwind `gap-6`)
+            console.log(cardWidth)
             const calculatedSlides = Math.floor(screenWidth / cardWidth);
-    
+            console.log(calculatedSlides)
             const show = Math.max(calculatedSlides, 1); // At least show 1
             setSlidesToShow(show);
             setSlidesToScroll(show);
         };
-    
         updateSlides();
         window.addEventListener("resize", updateSlides);
         return () => window.removeEventListener("resize", updateSlides);
@@ -45,7 +45,6 @@ export default function Products({ category, title }) {
     
 
     const settings = {
-        // dots: true,
         infinite: true,
         speed: 500,
         slidesToShow,
@@ -56,24 +55,26 @@ export default function Products({ category, title }) {
     };
 
     return (
-        <div className="sm:mx-5">
-            { isLoading && (
-                <div className="flex items-center justify-center">
-                    <Loading/>
-                </div>
-            )}
-            {!isLoading && (
-                <div className="flex flex-col gap-5">
-                    <h3 className="font-Montserrat uppercase font-bold text-xl md:text-2xl ml-5">{ title }</h3>
-                    <Slider key={slidesToShow} {...settings} >
-                        {products.map((product, index) => (
-                            <div key={index} className="px-2">
-                                <Product {...product} />
-                            </div>
-                        ))}
-                    </Slider>
-                </div>
-            )}
+        <div className="">
+            <div className="sm:mx-5 max-w-[1536px]">
+                { isLoading && (
+                    <div className="flex items-center justify-center">
+                        <Loading/>
+                    </div>
+                )}
+                {!isLoading && (
+                    <div className="flex flex-col gap-5">
+                        <h3 className="font-Montserrat uppercase font-bold text-xl md:text-2xl ml-5">{ title }</h3>
+                        <Slider key={slidesToShow} {...settings} >
+                            {products.map((product, index) => (
+                                <div key={index} className="px-2">
+                                    <Product {...product} />
+                                </div>
+                            ))}
+                        </Slider>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
