@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import LoadingTwo from "../../ui/LoadingTwo";
 import CategorizedProducts from "./products/CategorizedProducts";
+import { useNavigate } from "react-router-dom";
 
 export default function Item() {
     
@@ -11,6 +12,15 @@ export default function Item() {
     const [categorizedProducts, setCategorizedProducts] = useState([]);
     const [product, setProduct] = useState({});
     const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
+
+    function handleBuying() {
+        sessionStorage.setItem('PRODUCT_TO_BUY', JSON.stringify(product));
+        navigate("/checkout");
+        window.scroll(0, 0);
+    }
+    function handleAdding() {}
 
     useEffect(() => {
         setIsLoading(true);
@@ -82,10 +92,10 @@ export default function Item() {
                                             </ul>
             
                                             <div className="flex gap-4 mt-4">
-                                                <button className="px-6 py-2 bg-amber-400 hover:bg-amber-500 text-black rounded-lg font-semibold transition cursor-pointer">
+                                                <button onClick={handleBuying} className="px-6 py-2 bg-amber-400 hover:bg-amber-500 text-black rounded-lg font-semibold transition cursor-pointer">
                                                     Buy Now
                                                 </button>
-                                                <button className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition cursor-pointer">
+                                                <button onClick={handleAdding} className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition cursor-pointer">
                                                     + Add to Cart
                                                 </button>
                                             </div>

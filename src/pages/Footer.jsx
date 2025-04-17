@@ -4,7 +4,7 @@ import { faFacebook, faInstagram, faLinkedin, faYoutube } from "@fortawesome/fre
 
 export default function Footer() {
     return (
-        <footer>
+        <footer className="mt-10">
             <div className="container mx-auto flex items-start justify-around">
                 <section className="grid justify-items-start gap-4">
                     <h1 className="text-xl sm:text-2xl border-gray-400 border-b-[1px] font-medium font-Montserrat">Information</h1>

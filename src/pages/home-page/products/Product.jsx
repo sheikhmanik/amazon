@@ -24,7 +24,9 @@ export default function Product({
     minimumOrderQuantity,
     meta,
     images,
-    thumbnail
+    thumbnail,
+    handleBuying,
+    handleAdding
 }) {
 
     const dispatch = useDispatch();
@@ -74,12 +76,12 @@ export default function Product({
 
             {/* Buttons */}
             <div className="flex w-full h-10">
-                <button className="text-sm w-1/2 h-full bg-amber-300 dark:bg-amber-400 hover:bg-amber-400 hover:dark:bg-amber-500 text-black py-1 transition cursor-pointer">
+                <Link onClick={handleBuying} to="/checkout" className="flex items-center justify-center text-sm w-1/2 h-full bg-amber-300 dark:bg-amber-400 hover:bg-amber-400 hover:dark:bg-amber-500 text-black py-1 transition cursor-pointer">
                     Buy
-                </button>
-                <button className="text-sm w-1/2 h-full bg-blue-600 hover:bg-blue-700 text-white py-1 transition cursor-pointer">
+                </Link>
+                <Link onClick={handleAdding} className="flex items-center justify-center text-sm w-1/2 h-full bg-blue-600 hover:bg-blue-700 text-white py-1 transition cursor-pointer">
                     + Cart
-                </button>
+                </Link>
             </div>
         </div>
     );

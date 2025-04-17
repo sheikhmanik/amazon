@@ -79,16 +79,18 @@ export default function Header() {
     return (
         <>
         <Modal ref={modal}>
-            <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col">
                 <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">Your cart is empty</p>
 
-                <button 
-                    className="px-4 py-2 bg-white text-black rounded-lg shadow-md hover:bg-gray-100 transition-all cursor-pointer"
-                    onClick={onClose}
-                >
-                    Close
-                </button>
+                <div className="text-right">
+                    <button 
+                        className="px-4 py-2 bg-white text-black rounded-lg shadow-md hover:bg-gray-100 transition-all cursor-pointer"
+                        onClick={onClose}
+                    >
+                        Close
+                    </button>
+                </div>
             </div>
         </Modal>
         <header className="fixed w-screen bg-slate-800 dark:bg-slate-900 z-20">

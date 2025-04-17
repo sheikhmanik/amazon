@@ -1,7 +1,7 @@
 import { useEffect, useImperativeHandle, useRef } from "react";
 import { createPortal } from "react-dom";
 
-export default function Modal({ ref, children }) {
+export default function Modal({ ref, children, outsideClick }) {
 
     const dialog = useRef();
 
@@ -20,6 +20,7 @@ export default function Modal({ ref, children }) {
         const handleOutsideClick = (e) => {
             if (dialog.current && e.target === dialog.current) {
                 dialog.current.close();
+                outsideClick?.();
             }
         };
 
@@ -35,9 +36,11 @@ export default function Modal({ ref, children }) {
         <dialog
             id="modal"
             ref={dialog}
-            className="fixed top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md p-6 text-black dark:text-white bg-white dark:bg-gray-900 backdrop:bg-black/70 backdrop:backdrop-blur-sm rounded-2xl shadow-xl border-1 border-black dark:border-gray-400"
+            className="fixed top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md text-black dark:text-white bg-white dark:bg-gray-900 backdrop:bg-black/70 backdrop:backdrop-blur-sm rounded-2xl shadow-xl border-1 border-black dark:border-gray-400"
         >
-            { children }
+            <div className="p-6">
+                { children }
+            </div>
         </dialog>,
         document.getElementById('modal')
     );

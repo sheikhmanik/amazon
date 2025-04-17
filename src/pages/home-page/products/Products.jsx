@@ -61,12 +61,20 @@ export default function Products({ category, title }) {
             ) : (
                 <div className="flex flex-col gap-5">
                     <h3 className="font-Montserrat uppercase font-bold text-xl md:text-2xl ml-5">{ title }</h3>
+                    
                     <Slider key={slidesToShow} {...settings} >
-                        {products.map((product, index) => (
-                            <div key={index} className="px-2">
-                                <Product {...product} />
-                            </div>
-                        ))}
+                        {products.map((product, index) => {
+                            function handleBuying() {
+                                sessionStorage.setItem('PRODUCT_TO_BUY', JSON.stringify(product));
+                                window.scroll(0, 0);
+                            }
+                            function handleAdding() {}
+                            return (
+                                <div key={index} className="px-2">
+                                    <Product {...product} handleBuying={handleBuying} handleAdding={handleAdding} />
+                                </div>
+                            )
+                        })}
                     </Slider>
                 </div>
             )}
