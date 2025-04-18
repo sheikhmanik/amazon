@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialFunctionState = {
+const initialState = {
     clickedProductId: null,
     clickedProductCategory: null
 }
 
-const productFunctionSlice = createSlice({
+const productSlice = createSlice({
     name: 'function',
-    initialState: initialFunctionState,
+    initialState,
     reducers: {
         openItem(state, action) {
             const { category, id } = action.payload;
@@ -18,5 +18,5 @@ const productFunctionSlice = createSlice({
     
 })
 
-export const productFunctionActions = productFunctionSlice.actions;
-export default productFunctionSlice.reducer;
+export const productActions = productSlice.actions;
+export default productSlice.reducer;

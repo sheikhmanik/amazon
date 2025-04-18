@@ -49,7 +49,7 @@ export default function PaymentPage() {
         <>
         <Modal ref={modal} outsideClick={closeModal}>
             <div className="flex flex-col">
-                <h2 className="text-xl font-semibold mb-4 text-green-600">{button !== 'cash' ? "Payment Success!" : "Confirmed Order!"}</h2>
+                <h2 className="text-xl font-semibold mb-4 text-green-600">{button !== 'cash' ? "Payment Success!" : "Order Confirmed!"}</h2>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">You have succesfully ordered the product. Within 5-7 working days your product will be delivered.</p>
 
                 <div className="text-right">

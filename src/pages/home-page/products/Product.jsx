@@ -1,6 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"
-import { productFunctionActions } from "../../../store/product-function";
+import { productActions } from "../../../store/product.js";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../../store/cart.js";
+import { useState } from "react";
 
 export default function Product({
     id,
@@ -26,15 +28,23 @@ export default function Product({
     images,
     thumbnail,
     handleBuying,
-    handleAdding
 }) {
 
     const dispatch = useDispatch();
     function productClick(category, id) {
-        dispatch(productFunctionActions.openItem({ category, id }));
+        dispatch(productActions.openItem({ category, id }));
         localStorage.setItem('clickedProductId', id);
         localStorage.setItem('clickedProductCategory', category);
         window.scroll(0, 0);
+    }
+    
+    function handleAdding() {
+        fetch(`https://dummyjson.com/products/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                const product = data;
+                dispatch(cartActions.addToCart({ id, product }));
+            });
     }
 
     return (
@@ -76,12 +86,12 @@ export default function Product({
 
             {/* Buttons */}
             <div className="flex w-full h-10">
-                <Link onClick={handleBuying} to="/checkout" className="flex items-center justify-center text-sm w-1/2 h-full bg-amber-300 dark:bg-amber-400 hover:bg-amber-400 hover:dark:bg-amber-500 text-black py-1 transition cursor-pointer">
+                <button onClick={handleBuying} to="/checkout" className="flex items-center justify-center text-sm w-1/2 h-full bg-amber-300 dark:bg-amber-400 hover:bg-amber-400 hover:dark:bg-amber-500 text-black py-1 transition cursor-pointer">
                     Buy
-                </Link>
-                <Link onClick={handleAdding} className="flex items-center justify-center text-sm w-1/2 h-full bg-blue-600 hover:bg-blue-700 text-white py-1 transition cursor-pointer">
+                </button>
+                <button onClick={handleAdding} className="flex items-center justify-center text-sm w-1/2 h-full bg-blue-600 hover:bg-blue-700 text-white py-1 transition cursor-pointer">
                     + Cart
-                </Link>
+                </button>
             </div>
         </div>
     );

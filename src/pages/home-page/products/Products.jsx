@@ -68,10 +68,9 @@ export default function Products({ category, title }) {
                                 sessionStorage.setItem('PRODUCT_TO_BUY', JSON.stringify(product));
                                 window.scroll(0, 0);
                             }
-                            function handleAdding() {}
                             return (
                                 <div key={index} className="px-2">
-                                    <Product {...product} handleBuying={handleBuying} handleAdding={handleAdding} />
+                                    <Product {...product} handleBuying={handleBuying} />
                                 </div>
                             )
                         })}

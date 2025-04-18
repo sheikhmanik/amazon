@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCartShopping, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import amazonIcon from "../assets/amazon.png";
-import ModeToggle from "./header/ModeToggle";
+import ModeToggle from "./header/Theme";
 import Category from "./header/Category";
 import Language from "./header/Language";
 import Navbar from "./Navbar";
@@ -14,10 +14,21 @@ import LoadingTwo from "../ui/LoadingTwo";
 export default function Header() {
 
     const modal = useRef();
+    const navigate = useNavigate();
+    const location = useLocation();
     const [sideNav, setSideNav] = useState(false);
 
+    const cart = useSelector(state => state.cart.cartProducts);
+
     function handleModal() {
-        modal.current.open();
+        if (location.pathname !== '/cart') {
+            if (cart.length > 0) {
+                navigate('cart');
+                window.scroll(0, 0);
+            } else {
+                modal.current.open();
+            }
+        } 
     }
 
     function onClose() {
@@ -102,8 +113,11 @@ export default function Header() {
                         <Link to="/" onClick={() => window.scroll(0, 0)} ><img src={amazonIcon} alt="Amazon Icon" className="w-20 sm:w-30 block sm:hidden"/></Link>
                     </div>
                     <div className="flex gap-5">
-                    <Link to="account"><FontAwesomeIcon icon={faUser} className="scale-150"/></Link>
-                    <Link to="cart" onClick={handleModal}><FontAwesomeIcon icon={faCartShopping} className="scale-150"/></Link>
+                        <Link to="account"><FontAwesomeIcon icon={faUser} className="scale-150"/></Link>
+                        <div onClick={handleModal} className="relative flex items-center justify-center cursor-pointer">
+                            <FontAwesomeIcon icon={faCartShopping} className="scale-150"/>
+                            <div className="text-xs font-bold absolute -top-[13px] left-[2px] scale-75 w-4 h-4 rounded-full text-white dark:text-black bg-black dark:bg-white flex items-center justify-center">{cart.length}</div>
+                        </div>
                     </div>
                 </div>
 
@@ -170,9 +184,10 @@ export default function Header() {
                     <Link to="/account">
                         <FontAwesomeIcon icon={faUser} className="scale-150 cursor-pointer"/>
                     </Link>
-                    <Link to="cart" onClick={handleModal}>
-                        <FontAwesomeIcon icon={faCartShopping} className="scale-150 cursor-pointer"/>
-                    </Link>
+                    <div onClick={handleModal} className="relative flex items-center justify-center cursor-pointer">
+                        <FontAwesomeIcon icon={faCartShopping} className="scale-150"/>
+                        <div className="text-xs font-bold absolute -top-[17px] left-[2px] scale-75 w-4 h-4 rounded-full text-white dark:text-black bg-black dark:bg-white flex items-center justify-center">{cart.length}</div>
+                    </div>
                 </div>
 
                 <Navbar sideNav={sideNav} setSideNav={setSideNav} />

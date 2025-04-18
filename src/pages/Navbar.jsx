@@ -1,8 +1,7 @@
 import { faGear, faHome, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import ModeToggleTwo from "../ui/mode-toggle-2";
+import ThemeToggleTwo from "../ui/ThemeToggleTwo";
 
 export default function Navbar({ sideNav, setSideNav }) {
     return (
@@ -47,7 +46,7 @@ export default function Navbar({ sideNav, setSideNav }) {
                         <div className="flex items-center justify-between pl-3 pb-3 transition-transform duration-300">
                             <p className="text-md">Theme</p>
                             <div className="scale-75 pr-2">
-                                <ModeToggleTwo/>
+                                <ThemeToggleTwo/>
                             </div>
                         </div>
                     </div>

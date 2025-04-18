@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ToggleModeActions } from "../../store/mode";
+import { themeActions } from "../../store/theme";
 import useTheme from "../../hooks/useTheme";
 
-export default function ModeToggle() {
+export default function Theme() {
 
     const dispatch = useDispatch();
     const theme = useSelector(state => state.mode.theme)
     function handleMode() {
-        dispatch(ToggleModeActions.toggle());
+        dispatch(themeActions.toggle());
     }
 
     useTheme();

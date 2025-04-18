@@ -6,7 +6,7 @@ const getInitialValue = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
-const ToggleModeSlice = createSlice({
+const themeSlice = createSlice({
     name: 'toggle-mode',
     initialState: { theme: getInitialValue() },
     reducers: {
@@ -17,5 +17,5 @@ const ToggleModeSlice = createSlice({
     }
 })
 
-export const ToggleModeActions = ToggleModeSlice.actions;
-export default ToggleModeSlice.reducer;
+export const themeActions = themeSlice.actions;
+export default themeSlice.reducer;

@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function Item() {
     
-    const clickedProductId = useSelector(state => state.productFunction.clickedProductId || Number(localStorage.getItem('clickedProductId')))
-    const clickedProductCategory = useSelector(state => state.productFunction.clickedProductCategory || localStorage.getItem('clickedProductCategory'))
+    const clickedProductId = useSelector(state => state.product.clickedProductId || Number(localStorage.getItem('clickedProductId')))
+    const clickedProductCategory = useSelector(state => state.product.clickedProductCategory || localStorage.getItem('clickedProductCategory'))
 
     const [categorizedProducts, setCategorizedProducts] = useState([]);
     const [product, setProduct] = useState({});

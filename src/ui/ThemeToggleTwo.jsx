@@ -1,15 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { ToggleModeActions } from "../store/mode";
+import { themeActions } from "../store/theme";
 import useTheme from "../hooks/useTheme";
 
-export default function ModeToggleTwo() {
+export default function ThemeToggleTwo() {
 
     const dispatch = useDispatch();
     const theme = useSelector(state => state.mode.theme)
     function handleMode() {
-        dispatch(ToggleModeActions.toggle());
+        dispatch(themeActions.toggle());
     }
 
     useTheme();
