@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../store/cart";
-import { useEffect } from "react";
 
 export default function ShoppingCart() {
 

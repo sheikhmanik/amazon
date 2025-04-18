@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import LoadingTwo from "../../ui/LoadingTwo";
 import CategorizedProducts from "./products/CategorizedProducts";
 import { useNavigate } from "react-router-dom";
+import { cartActions } from "../../store/cart";
 
 export default function Item() {
     
@@ -20,7 +21,12 @@ export default function Item() {
         navigate("/checkout");
         window.scroll(0, 0);
     }
-    function handleAdding() {}
+    const dispatch = useDispatch();
+    function handleAdding(id) {
+        dispatch(cartActions.addToCart({id, product}));
+        navigate('/cart');
+        window.scroll(0, 0);
+    }
 
     useEffect(() => {
         setIsLoading(true);
@@ -95,7 +101,7 @@ export default function Item() {
                                                 <button onClick={handleBuying} className="px-6 py-2 bg-amber-400 hover:bg-amber-500 text-black rounded-lg font-semibold transition cursor-pointer">
                                                     Buy Now
                                                 </button>
-                                                <button onClick={handleAdding} className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition cursor-pointer">
+                                                <button onClick={() => handleAdding(clickedProductId, 1)} className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition cursor-pointer">
                                                     + Add to Cart
                                                 </button>
                                             </div>
