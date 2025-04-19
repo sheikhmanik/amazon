@@ -69,7 +69,7 @@ export default function Products({ category, title }) {
                             function handleBuying() {
                                 sessionStorage.setItem('PRODUCT_TO_BUY', JSON.stringify(product));
                                 window.scroll(0, 0);
-                                navigate("/checkout")
+                                navigate("/checkout");
                             }
                             return (
                                 <div key={index} className="px-2">

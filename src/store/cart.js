@@ -30,6 +30,10 @@ const cartSlice = createSlice({
                 state.cartProducts[productIndex].quantity += amount;
             }
             localStorage.setItem('cartProducts', JSON.stringify(state.cartProducts));
+        },
+        removeCartItem(state) {
+            state.cartProducts = [];
+            localStorage.removeItem('cartProducts');
         }
     }
 })

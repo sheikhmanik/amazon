@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Modal from "../ui/Modal";
+import { cartActions } from "../store/cart";
 
 export default function Payment() {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const dispath = useDispatch();
 
     const modal = useRef();
 
@@ -37,6 +40,11 @@ export default function Payment() {
     function handleSubmit(e) {
         e.preventDefault();
         modal.current.open();
+        if (location.state.fromCart) {
+            dispath(cartActions.removeCartItem());
+        } else if (location.state.fromCheckout) {
+            sessionStorage.removeItem('PRODUCT_TO_BUY');
+        }
     }
   
     useEffect(() => {

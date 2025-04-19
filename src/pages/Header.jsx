@@ -116,7 +116,9 @@ export default function Header() {
                         <Link to="account" onClick={() => window.scroll(0, 0)}><FontAwesomeIcon icon={faUser} className="scale-150"/></Link>
                         <div onClick={handleModal} className="relative flex items-center justify-center cursor-pointer">
                             <FontAwesomeIcon icon={faCartShopping} className="scale-150"/>
-                            <div className="text-xs font-bold absolute -top-[13px] left-[2px] scale-75 w-4 h-4 rounded-full text-white dark:text-black bg-black dark:bg-white flex items-center justify-center">{cart.length}</div>
+                            {cart.length > 0 && (
+                                <div className="text-xs font-bold absolute -top-[13px] left-[2px] scale-75 w-4 h-4 rounded-full text-black bg-white flex items-center justify-center">{cart.length}</div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -186,7 +188,9 @@ export default function Header() {
                     </Link>
                     <div onClick={handleModal} className="relative flex items-center justify-center cursor-pointer">
                         <FontAwesomeIcon icon={faCartShopping} className="scale-150"/>
-                        <div className="text-xs font-bold absolute -top-[17px] left-[2px] scale-75 w-4 h-4 rounded-full text-white dark:text-black bg-black dark:bg-white flex items-center justify-center">{cart.length}</div>
+                        {cart.length > 0 && (
+                            <div className="text-xs font-bold absolute -top-[17px] left-[2px] scale-75 w-4 h-4 rounded-full text-black bg-white flex items-center justify-center">{cart.length}</div>
+                        )}
                     </div>
                 </div>
 
