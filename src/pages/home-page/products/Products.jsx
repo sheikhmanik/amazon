@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Product from "./Product";
 import Loading from "../../../ui/Loading";
 
@@ -8,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default function Products({ category, title }) {
 
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -67,6 +69,7 @@ export default function Products({ category, title }) {
                             function handleBuying() {
                                 sessionStorage.setItem('PRODUCT_TO_BUY', JSON.stringify(product));
                                 window.scroll(0, 0);
+                                navigate("/checkout")
                             }
                             return (
                                 <div key={index} className="px-2">

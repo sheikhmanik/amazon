@@ -5,7 +5,7 @@ export default function Checkout() {
     const product = JSON.parse(sessionStorage.getItem("PRODUCT_TO_BUY"));
     const navigate = useNavigate();
     function handleProceedPayment() {
-        navigate('/checkout/payment-page', { state: { fromCheckout: true } });
+        navigate('/payment', { state: { fromCheckout: true } });
         window.scroll(0, 0);
     }
 

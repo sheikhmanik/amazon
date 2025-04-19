@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { cartActions } from "../store/cart";
 
 export default function ShoppingCart() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const cart = useSelector(state => state.cart.cartProducts);
     function updateQuantity(id, amount) {
         dispatch(cartActions.updateQuantity({id, amount}));
@@ -11,6 +13,11 @@ export default function ShoppingCart() {
 
     const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
     const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
+
+    function proceedPayment() {
+        navigate('/payment', { state: { fromCart: true } });
+        window.scroll(0, 0);
+    }
 
     return (
         <>
@@ -109,8 +116,8 @@ export default function ShoppingCart() {
                             <span>Total</span>
                             <span>{formattedTotalPrice}</span> {/* Replace with dynamic total later */}
                         </div>
-                        <button className="w-full bg-amber-400 hover:bg-amber-300 text-black font-semibold py-2 rounded-lg cursor-pointer">
-                            Proceed to Checkout
+                        <button onClick={proceedPayment} className="w-full bg-amber-400 hover:bg-amber-300 text-black font-semibold py-2 rounded-lg cursor-pointer">
+                            Proceed to Payment
                         </button>
                     </div>
                 </div>

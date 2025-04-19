@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Product from "./Product";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
@@ -6,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default function CategorizedProducts({ products, title}) {
 
+    const navigate = useNavigate();
     const [slidesToShow, setSlidesToShow] = useState(5);
     const [slidesToScroll, setSlidesToScroll] = useState(5);
 
@@ -40,16 +42,14 @@ export default function CategorizedProducts({ products, title}) {
                 <h3 className="font-Montserrat uppercase font-bold text-xl md:text-2xl ml-5">{ title }</h3>
                 <Slider key={slidesToShow} {...settings} >
                     {products.map((product, index) => {
-
                         function handleBuying() {
                             sessionStorage.setItem('PRODUCT_TO_BUY', JSON.stringify(product));
                             window.scroll(0, 0);
+                            navigate("/checkout")
                         }
-                        function handleAdding() {}
-
                         return (
                             <div key={index} className="px-2">
-                                <Product {...product} handleBuying={handleBuying} handleAdding={handleAdding} />
+                                <Product {...product} handleBuying={handleBuying} />
                             </div>
                         )
                     })}

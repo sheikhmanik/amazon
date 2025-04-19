@@ -92,7 +92,7 @@ export default function Header() {
         <Modal ref={modal}>
             <div className="flex flex-col">
                 <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">Your cart is empty</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">Your cart is empty!</p>
 
                 <div className="text-right">
                     <button 
@@ -113,7 +113,7 @@ export default function Header() {
                         <Link to="/" onClick={() => window.scroll(0, 0)} ><img src={amazonIcon} alt="Amazon Icon" className="w-20 sm:w-30 block sm:hidden"/></Link>
                     </div>
                     <div className="flex gap-5">
-                        <Link to="account"><FontAwesomeIcon icon={faUser} className="scale-150"/></Link>
+                        <Link to="account" onClick={() => window.scroll(0, 0)}><FontAwesomeIcon icon={faUser} className="scale-150"/></Link>
                         <div onClick={handleModal} className="relative flex items-center justify-center cursor-pointer">
                             <FontAwesomeIcon icon={faCartShopping} className="scale-150"/>
                             <div className="text-xs font-bold absolute -top-[13px] left-[2px] scale-75 w-4 h-4 rounded-full text-white dark:text-black bg-black dark:bg-white flex items-center justify-center">{cart.length}</div>
@@ -181,7 +181,7 @@ export default function Header() {
                 <div className="hidden sm:flex items-center justify-center gap-5">
                     <Language/>
                     <ModeToggle/>
-                    <Link to="/account">
+                    <Link to="/account" onClick={() => window.scroll(0, 0)}>
                         <FontAwesomeIcon icon={faUser} className="scale-150 cursor-pointer"/>
                     </Link>
                     <div onClick={handleModal} className="relative flex items-center justify-center cursor-pointer">

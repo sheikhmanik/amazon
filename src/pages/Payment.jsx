@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "../ui/Modal";
 
-export default function PaymentPage() {
+export default function Payment() {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -40,7 +40,7 @@ export default function PaymentPage() {
     }
   
     useEffect(() => {
-        if (!location.state?.fromCheckout) {
+        if (!location.state?.fromCheckout && !location.state?.fromCart) {
             navigate("/");
         }
     }, [location, navigate]);
