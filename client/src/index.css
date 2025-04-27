@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: false
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+body { 
+  @apply bg-base-100 dark:bg-slate-800 text-gray-900 dark:text-gray-100
+}
+
+#modal {
+  animation: slide-up-fade-in 0.3s ease-out forwards;
+}
+
+@keyframes slide-up-fade-in {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
