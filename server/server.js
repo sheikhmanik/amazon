@@ -1,9 +1,8 @@
-import dotenv from "dotenv";
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import { productsRoutes } from './routes/products.js';
 dotenv.config();
-
-const express = require('express');
-const cors = require('cors');
-const productsRoutes = require('./routes/products');
 
 const app = express();
 

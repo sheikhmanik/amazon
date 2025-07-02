@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import axios from 'axios';
+import db from '../db.js';
+
 const router = express.Router();
-const axios = require('axios');
-const db = require('../db');
 
 router.use('/fetch-and-store-products', async (req, res) => {
     const response = await axios.get('https://dummyjson.com/products');
@@ -34,4 +35,4 @@ router.use('/products', (req, res) => {
     })
 })
 
-module.exports = router;
+export const productsRoutes = router;
