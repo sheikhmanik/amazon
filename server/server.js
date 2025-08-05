@@ -11,12 +11,17 @@ app.use(cors({
     origin: ['https://amazon-dnzu.onrender.com'],
     credentials: true
 }));
-app.use(express.json()); // To parse incoming JSON
+
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('Backend is running!');
+});
 
 app.use('/api', productsRoutes);
 
-// Use dynamic port for Render
 const PORT = process.env.PORT;
+
 app.listen(PORT, () => {
     console.log(`Server started at port ${PORT}`);
 });
