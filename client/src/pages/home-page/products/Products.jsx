@@ -14,9 +14,11 @@ export default function Products({ category, title }) {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     async function fetchProducts() {
         setIsLoading(true);
-        const response = await axios.get('http://localhost:3000/api/products');
+        const response = await axios.get(`${BASE_URL}/api/products`);
         const data = response.data.products;
         const filteredProducts = category.toLowerCase() === 'all' 
         ? data

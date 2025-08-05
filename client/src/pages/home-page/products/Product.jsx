@@ -31,6 +31,8 @@ export default function Product({
 }) {
 
     const dispatch = useDispatch();
+
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     
     function productClick(category, id) {
         dispatch(productActions.openItem({ category, id }));
@@ -40,7 +42,7 @@ export default function Product({
     }
     
     async function handleAdding() {
-        const response = await axios.get('http://localhost:3000/api/products');
+        const response = await axios.get(`${BASE_URL}/api/products`);
         const data = response.data.products;
         const product = data.find(product => product.id === id);
         dispatch(cartActions.addToCart({ id, product }));

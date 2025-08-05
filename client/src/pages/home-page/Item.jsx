@@ -15,6 +15,8 @@ export default function Item() {
     const [product, setProduct] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     const navigate = useNavigate();
 
     function handleBuying() {
@@ -31,7 +33,7 @@ export default function Item() {
 
     async function fetchProducts() {
         setIsLoading(true);
-        const response = await axios.get('http://localhost:3000/api/products');
+        const response = await axios.get(`${BASE_URL}/api/products`);
         const data = response.data.products;
         const allProducts = data.filter(product => product.category.toLowerCase() === clickedProductCategory.toLowerCase());
         const products = allProducts.filter(product => product.id !== clickedProductId);

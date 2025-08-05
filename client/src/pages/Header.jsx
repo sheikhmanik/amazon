@@ -21,6 +21,8 @@ export default function Header() {
     const dispatch = useDispatch();
     const [sideNav, setSideNav] = useState(false);
 
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     const cart = useSelector(state => state.cart.cartProducts);
 
     function handleModal() {
@@ -54,7 +56,7 @@ export default function Header() {
         if (value.trim() !== "") {
             setIsLoading(true);
             setOpenResultsDiv(true);
-            const response = await axios.get('http://localhost:3000/api/products');
+            const response = await axios.get(`${BASE_URL}/api/products`);
             const data = response.data.products;
 
             const filteredProducts = category.toLowerCase() === 'all'
